@@ -1,5 +1,8 @@
+import java.io.FileReader;
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class Main {
 
@@ -7,6 +10,22 @@ public class Main {
 
         HashMap<String, String> instructions = initializeInstructionMap();
         HashMap<String, String> registers = initializeRegisterMap();
+
+        BufferedReader reader;
+        String line;
+        try {
+            reader = new BufferedReader(new FileReader("input.txt"));
+            line = reader.readLine();
+            while(line != null){
+                System.out.println(instructionToBinary(line));
+                line = reader.readLine();
+
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         //TODO
         //Input okunup, output a çevirilecek (outputBinary.txt e yazılacak).
@@ -66,5 +85,30 @@ public class Main {
         registers.put("R14", "1110");
         registers.put("R15", "1111");
         return registers;
+    }
+
+
+    public static String instructionToBinary(String line){
+        HashMap<String, String> instructions = initializeInstructionMap();
+        HashMap<String, String> registers = initializeRegisterMap();
+        String binary;
+        String opcode[];
+        String dataElement[];
+        opcode = line.split(" ");
+
+        binary = instructions.get(opcode[0]);
+        dataElement = opcode[1].split(",");
+       if(opcode[0] == "LD" || opcode[0] == "ST") {
+
+       } else if(opcode[0] == "JUMP") {
+
+       } else if(opcode[0].charAt(opcode[0].length()-1) == 'I') {
+
+       } else {
+
+       }
+
+
+        return binary;
     }
 }
