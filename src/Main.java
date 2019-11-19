@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.HashMap;
 
 public class Main {
@@ -22,9 +23,15 @@ public class Main {
         instructions.put("BGT", "1101");
         instructions.put("BLE", "1110");
         instructions.put("BGE", "1111");
-
-
-
+/*
+        //Initialize the Register for Instructions
+        HashMap<String, String> registers = new HashMap<>();
+        for (int i = 0; i < 16; i++) {
+            String value = Integer.toBinaryString(i);
+            registers.put("R" + i, i);
+        }
+        */
+        System.out.println(String.format(Integer.toBinaryString(0)));
 
     }
 }
