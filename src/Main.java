@@ -28,7 +28,7 @@ public class Main {
 
 
         //TODO
-        //Input okunup, output a çevirilecek (outputBinary.txt e yazılacak).
+        //Input okundu, output a çevirilecek (outputBinary.txt e yazılacak).
         //Outut.txt deki binary'yi satır satır hex e çevir, outputHex.txt e yaz.
 
     }
@@ -98,14 +98,46 @@ public class Main {
 
         binary = instructions.get(opcode[0]);
         dataElement = opcode[1].split(",");
-       if(opcode[0] == "LD" || opcode[0] == "ST") {
 
-       } else if(opcode[0] == "JUMP") {
-
-       } else if(opcode[0].charAt(opcode[0].length()-1) == 'I') {
-
-       } else {
-
+        if(opcode[0].compareTo("ADD") == 0 || opcode[0].compareTo("AND") == 0 || opcode[0].compareTo("OR") == 0 ||opcode[0].compareTo("XOR") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += registers.get(dataElement[2]);
+            binary +="00";
+        } else if(opcode[0].compareTo("ADDI") == 0 || opcode[0].compareTo("ANDI") == 0 || opcode[0].compareTo("ORI") == 0 ||opcode[0].compareTo("XORI") == 0){
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 6);
+        } else if(opcode[0].compareTo("JUMP") == 0) {
+            binary += Converter.decToBin(dataElement[0], 14);
+       } else if(opcode[0].compareTo("LD") == 0 || opcode[0].compareTo("ST") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += Converter.decToBin(dataElement[1], 10);
+       } else if(opcode[0].compareTo("BEQ") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 3);
+            binary += "010";
+        } else if(opcode[0].compareTo("BLT") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 3);
+            binary += "100";
+        } else if(opcode[0].compareTo("BGT") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 3);
+            binary += "001";
+        } else if(opcode[0].compareTo("BLE") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 3);
+            binary += "110";
+        } else if(opcode[0].compareTo("BGE") == 0) {
+            binary += registers.get(dataElement[0]);
+            binary += registers.get(dataElement[1]);
+            binary += Converter.decToBin(dataElement[2], 3);
+            binary += "011";
        }
 
 
