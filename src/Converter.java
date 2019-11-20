@@ -12,6 +12,14 @@ public class Converter {
     public static String binToHex(String s) {
         int decimal  = Integer.parseInt(s, 2);
         String hexStr = Integer.toString(decimal, 16);
+
+        if(hexStr.length() < 5) {
+            int len = hexStr.length();
+            for(int i = 0; i < 5 - len; i++){
+                hexStr = "0" + hexStr;
+            }
+
+        }
         return hexStr.toUpperCase();
     }
 

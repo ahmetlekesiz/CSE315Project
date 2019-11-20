@@ -12,12 +12,15 @@ public class Main {
         HashMap<String, String> registers = initializeRegisterMap();
 
         BufferedReader reader;
-        String line;
+        String line, bin;
         try {
             reader = new BufferedReader(new FileReader("input.txt"));
             line = reader.readLine();
             while(line != null){
-                System.out.println(instructionToBinary(line));
+                bin = instructionToBinary(line);
+
+                System.out.println(Converter.binToHex(bin));
+
                 line = reader.readLine();
 
             }
