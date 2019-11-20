@@ -1,30 +1,32 @@
-import java.io.FileReader;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.HashMap;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        String hex;
         HashMap<String, String> instructions = initializeInstructionMap();
         HashMap<String, String> registers = initializeRegisterMap();
 
+        BufferedWriter bufferedWriter;
         BufferedReader reader;
         String line, bin;
         try {
+            bufferedWriter = new BufferedWriter(new FileWriter("output.txt"));
             reader = new BufferedReader(new FileReader("input.txt"));
             line = reader.readLine();
             while(line != null){
                 bin = instructionToBinary(line);
 
-                System.out.println(Converter.binToHex(bin));
+                bufferedWriter.write(Converter.binToHex(bin));
+                bufferedWriter.newLine();
 
                 line = reader.readLine();
 
             }
             reader.close();
+            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,8 +97,8 @@ public class Main {
         HashMap<String, String> instructions = initializeInstructionMap();
         HashMap<String, String> registers = initializeRegisterMap();
         String binary;
-        String opcode[];
-        String dataElement[];
+        String[] opcode;
+        String[] dataElement;
         opcode = line.split(" ");
 
         binary = instructions.get(opcode[0]);
