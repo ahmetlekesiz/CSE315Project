@@ -1,13 +1,8 @@
 import java.io.*;
-import java.math.BigInteger;
 import java.util.HashMap;
 
 public class Main {
-
     public static void main(String[] args) {
-        String hex;
-        HashMap<String, String> instructions = initializeInstructionMap();
-        HashMap<String, String> registers = initializeRegisterMap();
 
         BufferedWriter bufferedWriter;
         BufferedReader reader;
@@ -30,23 +25,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        //TODO
-        //Input okundu, output a çevirilecek (outputBinary.txt e yazılacak).
-        //Outut.txt deki binary'yi satır satır hex e çevir, outputHex.txt e yaz.
-
     }
-
-    //Hashmaplerin oluşturulması için daha kısa kod yaz.
-        /*
-        //Initialize the Register for Instructions
-        HashMap<String, String> registers = new HashMap<>();
-        for (int i = 0; i < 16; i++) {
-            String value = Integer.toBinaryString(i);
-            registers.put("R" + i, i);
-        }
-        */
 
     public static HashMap<String, String> initializeInstructionMap(){
         //Initialize the Hashmap for Instructions
@@ -91,7 +70,6 @@ public class Main {
         registers.put("R15", "1111");
         return registers;
     }
-
 
     public static String instructionToBinary(String line){
         HashMap<String, String> instructions = initializeInstructionMap();
